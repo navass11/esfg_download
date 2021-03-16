@@ -1,4 +1,14 @@
 import rotated_grid_transform
+import os
+def find(path,GCM,RCM,Ensemble,Experiment,variable):
+    directory_files=list()
+    root_list=list()
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if (variable in file) & (GCM in file) & (RCM in file) & (Ensemble in file) & (Experiment in file) & (variable in file) & ('.nc' in file):
+                directory_files.append(file)
+                root_list.append(root)
+    return directory_files, np.unique(root_list)
 
  def extract_CORDEX_EUR11(path_input,path_output,area=False,lon_min_area=None,lat_min_area=None,lon_max_area=None,lat_max_area=None,point=True,
                          lon_point=None,lat_point=None,name_point=None):
